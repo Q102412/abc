@@ -179,7 +179,8 @@
   .chip{font-size:11px;padding:3px 9px;border-radius:7px;background:var(--primary-soft);color:var(--primary-ink);font-weight:600}
   .proj .res{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px}
   .proj .res svg{width:15px;height:15px;fill:none;stroke:var(--primary);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .proj a.link{font-size:13px;color:var(--primary);font-weight:600}
+  .proj a.link{display:inline-block;margin-top:10px;font-size:13px;color:var(--primary);font-weight:600}
+  .proj a.link:hover{text-decoration:underline}
 
   /* 技能矩阵 */
   .skill-cat h4{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
@@ -377,7 +378,8 @@ const resume = {
   keywords: ["AI 编程建站", "AI 内容生产", "短剧创作", "结构化 PPT", "钢琴十级", "人工智能训练师(高/初)"],
 
   highlights: [
-    { num: "国赛", lab: "RST 机器人及仿真技术大赛", desc: "2026.10 入围全国总决赛，检验仿真与工程实践能力" },
+    { num: "省二", lab: "RST 先进机器人及仿真技术大赛", desc: "2026.10 获省级二等奖，并入围全国总决赛" },
+    { num: "省三", lab: "iCAN 大学生创新创业大赛", desc: "获省级三等奖，完成创新创业项目方案设计" },
     { num: "双证", lab: "人工智能训练师", desc: "同时持有高级与初级证书，覆盖数据标注到模型评测全链路" },
     { num: "2 天", lab: "从零建站上线", desc: "借助 AI 编程工具完成需求拆解、页面设计与部署" },
     { num: "十级", lab: "钢琴考级最高级", desc: "长期系统训练，形成强自律与目标管理能力" },
@@ -413,10 +415,18 @@ const resume = {
       items: [
         {
           title: "RST 先进机器人及仿真技术大赛",
-          meta: "国赛入围 · 2026.10",
+          meta: "省级二等奖 · 国赛入围 · 2026.10",
           points: [
-            "从校赛晋级至全国总决赛，完成机器人仿真方案设计与验证",
-            "在工程实践与跨工具协作中锻炼问题拆解能力"
+            "获省级二等奖，并从校赛晋级至全国总决赛",
+            "完成机器人仿真方案设计与验证，在工程实践与跨工具协作中锻炼问题拆解能力"
+          ]
+        },
+        {
+          title: "iCAN 大学生创新创业大赛",
+          meta: "省级三等奖",
+          points: [
+            "完成创新创业项目方案设计，获省级三等奖",
+            "在项目推进中锻炼市场调研、方案迭代与团队协作能力"
           ]
         }
       ]
@@ -427,11 +437,29 @@ const resume = {
     {
       cat: "竞赛",
       name: "RST 先进机器人及仿真技术大赛",
-      tag: "国赛入围",
-      desc: "面向机器人与仿真技术的国家级赛事，独立完成方案设计与仿真验证并晋级全国总决赛。",
+      tag: "省二 · 国赛入围",
+      desc: "面向机器人与仿真技术的赛事，独立完成方案设计与仿真验证，获省级二等奖并晋级全国总决赛。",
       stack: ["机器人仿真", "方案设计", "工程验证"],
-      result: "2026.10 入围国赛",
+      result: "2026.10 省级二等奖 / 国赛入围",
       link: ""
+    },
+    {
+      cat: "竞赛",
+      name: "iCAN 大学生创新创业大赛",
+      tag: "省级三等奖",
+      desc: "围绕创新创业项目完成方案设计与市场调研，获省级三等奖。",
+      stack: ["创新创业", "方案设计", "市场调研"],
+      result: "省级三等奖",
+      link: ""
+    },
+    {
+      cat: "作品",
+      name: "坦克大战 HTML5 小游戏",
+      tag: "在线可玩",
+      desc: "网页端坦克大战小游戏，含 5 个关卡、键盘与触屏操作、音效及本地进度存档，适配移动端浏览器。",
+      stack: ["HTML5 Canvas", "JavaScript", "Web Audio API"],
+      result: "已上线 GitHub Pages",
+      link: "https://q102412.github.io/g/"
     },
     {
       cat: "技术",
@@ -508,10 +536,11 @@ const resume = {
     { t: "人工智能训练师", s: "高级", i: "AI" },
     { t: "人工智能训练师", s: "初级", i: "AI" },
     { t: "钢琴考级", s: "十级", i: "♪" },
-    { t: "RST 大赛", s: "国赛入围", i: "★" }
+    { t: "RST 大赛", s: "省二 / 国赛入围", i: "★" },
+    { t: "iCAN 大学生创新创业大赛", s: "省三", i: "★" }
   ],
 
-  updated: "2026.10.23"
+  updated: "2026.11.25"
 };
 
 /* ============================================================
@@ -624,6 +653,11 @@ buildTabs($("#expTabs"), resume.experience, (panel,g)=>{
       res.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
       res.appendChild(document.createTextNode(p.result));
       card.appendChild(res);
+      if(p.link){
+        const a = E("a","link",'查看作品 →');
+        a.href = p.link; a.target = "_blank"; a.rel = "noopener noreferrer";
+        card.appendChild(a);
+      }
       panel.appendChild(grid);
       grid.appendChild(card);
     });
